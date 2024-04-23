@@ -1,0 +1,24 @@
+# Developed by XStreamStudio
+# Version 0.0.1
+
+# Debug
+# Only enable while testing or facing issues
+debug: false
+
+# Time interval of the KeyAll event can be configured below
+# Time interval is in seconds
+timeInterval: 60
+
+# Command to be executed when timer ends
+# This executes the command from console
+# Do not put player commands in here
+command: "crate key giveall key 1 -s"
+
+# Message sent when the KeyAll event is over
+# Color codes are supported (Eg: &e, &a, etc..)
+message: "&aCongratulations! You've been awarded a key as part of our Key All event!"
+
+# Sound to be player on the KeyAll event
+# Has to be a sound available within minecraft itself
+# Default : ENTITY_EXPERIENCE_ORB_PICKUP
+sound: ENTITY_EXPERIENCE_ORB_PICKUP
