@@ -44,7 +44,7 @@ KeyAllX is developed and maintained by XSteamStudio. We're committed to continuo
 
 ## License
 
-KeyAllX is licensed under the GNU General Public License v3.0. You are free to modify and distribute the plugin in accordance with the terms of the license.
+KeyAllX is licensed under the GNU General Public License v3.0. You are free to distribute the plugin in accordance with the terms of the license.
 
 ## Disclaimer
 
