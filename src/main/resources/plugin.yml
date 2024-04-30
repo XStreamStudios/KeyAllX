@@ -1,5 +1,5 @@
 name: KeyAllX
-version: 0.0.1
+version: 0.0.7
 main: studio.xstream.keyallx.KeyAllX
 api-version: '1.20'
 author: XStreamStudio
