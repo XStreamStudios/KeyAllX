@@ -21,6 +21,10 @@ public class StartAndStop implements CommandExecutor {
         if (cmd.equalsIgnoreCase("reset-timer")) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
+                if (!player.hasPermission("keyallx.reset_timer")) {
+                    player.sendMessage("You don't have permissions to run this command");
+                    return true;
+                }
                 plugin.stopTimer();
                 plugin.startTimer();
                 player.sendMessage(ChatColor.GREEN + "Timer has been reset!");
