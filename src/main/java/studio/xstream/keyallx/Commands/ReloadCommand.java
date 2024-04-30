@@ -23,7 +23,12 @@ public class ReloadCommand implements CommandExecutor {
         if (cmd.equalsIgnoreCase("keyallx") && args.length > 0 && args[0].equalsIgnoreCase("reload")) {
 
             if (sender instanceof Player) {
+
                 Player player = (Player) sender;
+                if (!player.hasPermission("keyallx.reload")) {
+                    player.sendMessage("You don't have permissions to run this command");
+                    return true;
+                }
                 plugin.reloadConfig();
                 player.sendMessage(ChatColor.GREEN + "Config has been reloaded!");
             } else {
