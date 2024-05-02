@@ -21,37 +21,29 @@ public final class KeyAllX extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Generate config file
         File configFile  = new File(getDataFolder(), "config.yml");
         if (!configFile.exists()) {
             getLogger().info("Creating config.yml...");
             saveDefaultConfig();
         }
 
-        // Access the config
         FileConfiguration config = getConfig();
 
-        // Load values
         timeInterval = config.getInt("timeInterval", 60);
 
-        // Save the config file
         saveConfig();
 
-        // Get console sender
         console = Bukkit.getConsoleSender();
 
-        // Register commands
         getCommand("keyallx").setExecutor(new ReloadCommand(this));
         getCommand("reset-timer").setExecutor(new StartAndStop(this));
 
-        // Check for soft-depend
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new KeyAllXPlaceholder(this).register();
         } else {
             getLogger().warning("PlaceholderAPI not found! Placeholder will not work.");
         }
 
-        // Start the timer after loading the config in
         startTimer();
 
     }
@@ -69,7 +61,7 @@ public final class KeyAllX extends JavaPlugin {
             if (timeInterval <= 0)  {
                 for (Player player  : Bukkit.getOnlinePlayers()) {
                     if (player.isOnline()) {
-                        //TODO Send messages & play sound
+                        // Send messages & play sound
                         String soundName = getConfig().getString("sound", "ENTITY_EXPERIENCE_ORB_PICKUP");
                         Sound sound = Sound.valueOf(soundName);
                         player.playSound(player.getLocation(), sound, 1.0f, 1.0f);

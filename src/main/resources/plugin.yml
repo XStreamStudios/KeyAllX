@@ -8,9 +8,9 @@ softdepend:
 commands:
   keyallx:
     description: Reload the plugin with /keyallx reload
-    permission: op
+    permission: keyallx.reload
 
   reset-timer:
     usage: /reset-timer
     description: Reset the keyall timer
-    permission: op
+    permission: keyallx.reset_timer
