@@ -37,7 +37,11 @@ public final class KeyAllX extends JavaPlugin {
         console = Bukkit.getConsoleSender();
 
         getCommand("keyallx").setExecutor(new ReloadCommand(this));
+        getCommand("keyallx").setTabCompleter(new ReloadCommand(this));
         getCommand("reset-timer").setExecutor(new StartAndStop(this));
+
+        int pluginId = 21830;
+        Metrics metrics = new Metrics(this, pluginId);
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new KeyAllXPlaceholder(this).register();
