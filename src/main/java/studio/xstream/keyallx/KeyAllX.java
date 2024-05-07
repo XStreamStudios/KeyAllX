@@ -12,6 +12,7 @@ import studio.xstream.keyallx.Commands.StartAndStop;
 import studio.xstream.keyallx.PAPI.KeyAllXPlaceholder;
 
 import java.io.File;
+import java.util.List;
 
 public final class KeyAllX extends JavaPlugin {
 
@@ -56,18 +57,25 @@ public final class KeyAllX extends JavaPlugin {
     // Timer  | Start & Stop |
 
     public void startTimer() {
+        timeInterval = getConfig().getInt("timeInterval", 60);
         taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             timeInterval--;
             if (timeInterval <= 0)  {
                 for (Player player  : Bukkit.getOnlinePlayers()) {
                     if (player.isOnline()) {
-                        // Send messages & play sound
+                        //  play sound
                         String soundName = getConfig().getString("sound", "ENTITY_EXPERIENCE_ORB_PICKUP");
                         Sound sound = Sound.valueOf(soundName);
                         player.playSound(player.getLocation(), sound, 1.0f, 1.0f);
                         // Send message
-                        String message = getConfig().getString("message", "&aCongratulations! You've been awarded a key as part of our Key All event!");
-                        player.sendMessage(translateColorCodes(message));
+                        List<String> messages = getConfig().getStringList("message");
+                        if (messages.isEmpty()) {
+                            messages.add("&aCongratulations! You've been awarded a key as part of our Key All event!");
+                        }
+
+                        for (String message :  messages) {
+                            player.sendMessage(translateColorCodes(message));
+                        }
                     }
                 }
 
@@ -97,7 +105,7 @@ public final class KeyAllX extends JavaPlugin {
                         }
                     } catch (Exception e) {
                         getLogger().warning("Error while dispatching command: " + e.getMessage());
-                        e.printStackTrace(); // Print the stack trace for debugging
+                        e.printStackTrace();
                     }
                 });
 
