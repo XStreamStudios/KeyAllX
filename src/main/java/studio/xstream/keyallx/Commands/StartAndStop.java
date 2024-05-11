@@ -25,12 +25,10 @@ public class StartAndStop implements CommandExecutor {
                     player.sendMessage("You don't have permissions to run this command");
                     return true;
                 }
-                plugin.stopTimer();
-                plugin.startTimer();
+                plugin.resetTimer();
                 player.sendMessage(ChatColor.GREEN + "Timer has been reset!");
             } else {
-                plugin.stopTimer();
-                plugin.startTimer();
+                plugin.resetTimer();
                 sender.sendMessage("Timer has been reset!");
             }
         }

@@ -1,5 +1,5 @@
-# Developed by XStreamStudio
-# Version 0.0.10
+# Developed by NeonStudios
+# Version 0.1.1
 
 # Debug
 # Only enable while testing or facing issues
@@ -14,6 +14,16 @@ timeInterval: 60
 # Do not put player commands in here
 command: "crate key giveall key 1 -s"
 
+# Enable or disable sending the title message
+# Everything in the title is customizable
+# title-fade-in, title-stay & title-fade-out are all in ticks
+enable-title-message: true
+title-message: "&aCongratulations!"
+subtitle-message: "You've been awarded a key as part of our Key All event!"
+title-fade-in: 10
+title-stay: 70
+title-fade-out: 20
+
 # Message sent when the KeyAll event is over
 # Color codes are supported (Eg: &e, &a, etc..)
 # Add more line by using "-"
@@ -24,4 +34,7 @@ message:
 # Sound to be player on the KeyAll event
 # Has to be a sound available within minecraft itself
 # Default : ENTITY_EXPERIENCE_ORB_PICKUP
+enable-sound-effects: true
 sound: ENTITY_EXPERIENCE_ORB_PICKUP
+volume: 0.5
+pitch: 2.0

@@ -68,9 +68,30 @@ public final class KeyAllX extends JavaPlugin {
                 for (Player player  : Bukkit.getOnlinePlayers()) {
                     if (player.isOnline()) {
                         //  play sound
-                        String soundName = getConfig().getString("sound", "ENTITY_EXPERIENCE_ORB_PICKUP");
-                        Sound sound = Sound.valueOf(soundName);
-                        player.playSound(player.getLocation(), sound, 1.0f, 1.0f);
+                        if (getConfig().getBoolean("enable-sound-effects")) {
+                            String soundName = getConfig().getString("sound", "ENTITY_EXPERIENCE_ORB_PICKUP");
+                            Sound sound = Sound.valueOf(soundName);
+                            float volume = (float) getConfig().getDouble("volume", 1.0);
+                            float pitch = (float) getConfig().getDouble("pitch", 1.0);
+                            player.playSound(player.getLocation(), sound, volume, pitch);
+                        }
+
+                        // Send title
+
+                        if (getConfig().getBoolean("enable-title-message")) {
+                            String titleMessage = getConfig().getString("title-message", "&aCongratulations!");
+                            String subTitleMessage = getConfig().getString("subtitle-message", "You've been awarded a key as part of our Key All event!");
+
+                            titleMessage = translateColorCodes(titleMessage);
+                            subTitleMessage = translateColorCodes(subTitleMessage);
+
+                            int fadeIn = getConfig().getInt("title-fade-in", 10);
+                            int stay = getConfig().getInt("title-stay", 70);
+                            int fadeOut = getConfig().getInt("title-fade-out", 20);
+
+                            player.sendTitle(titleMessage, subTitleMessage, fadeIn, stay, fadeOut);
+                        }
+
                         // Send message
                         List<String> messages = getConfig().getStringList("message");
                         if (messages.isEmpty()) {
@@ -121,6 +142,11 @@ public final class KeyAllX extends JavaPlugin {
 
     public void stopTimer() {
         Bukkit.getScheduler().cancelTask(taskId);
+    }
+
+    public void resetTimer() {
+        stopTimer();
+        startTimer();
     }
 
     private String translateColorCodes(String message) {

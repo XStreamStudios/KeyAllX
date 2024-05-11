@@ -8,6 +8,13 @@ import studio.xstream.keyallx.KeyAllX;
 import java.util.concurrent.TimeUnit;
 
 public class KeyAllXPlaceholder extends PlaceholderExpansion {
+    /*
+        %keyallx_timer%: Displays the remaining time until the next key distribution.(This is a combined placeholder for all the following)
+        %keyallx_days%: Displays the remaining days until next key
+        %keyallx_hours%: Displays the remaining hours until next key
+        %keyallx_mins%: Displays the remaining mins until next key
+        %keyallx_secs%: Displays the remaining secs until next key
+     */
 
     private final KeyAllX plugin;
 
