@@ -25,7 +25,7 @@ public class ReloadCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String cmd, @NotNull String[] args) {
 
-        if (cmd.equalsIgnoreCase("keyallx") && args.length > 0 && args[0].equalsIgnoreCase("reload")) {
+        if(command.getName().equalsIgnoreCase("keyallx") && args.length > 0 && args[0].equalsIgnoreCase("reload")) {
 
             if (sender instanceof Player) {
 

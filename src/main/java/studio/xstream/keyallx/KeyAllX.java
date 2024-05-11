@@ -42,6 +42,7 @@ public final class KeyAllX extends JavaPlugin {
 
         int pluginId = 21830;
         Metrics metrics = new Metrics(this, pluginId);
+        getLogger().info("Loaded bStats");
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new KeyAllXPlaceholder(this).register();
@@ -70,11 +71,16 @@ public final class KeyAllX extends JavaPlugin {
                         //  play sound
                         if (getConfig().getBoolean("enable-sound-effects")) {
                             String soundName = getConfig().getString("sound", "ENTITY_EXPERIENCE_ORB_PICKUP");
-                            Sound sound = Sound.valueOf(soundName);
-                            float volume = (float) getConfig().getDouble("volume", 1.0);
-                            float pitch = (float) getConfig().getDouble("pitch", 1.0);
-                            player.playSound(player.getLocation(), sound, volume, pitch);
+                            try {
+                                Sound sound = Sound.valueOf(soundName);
+                                float volume = (float) getConfig().getDouble("volume", 1.0);
+                                float pitch = (float) getConfig().getDouble("pitch", 1.0);
+                                player.playSound(player.getLocation(), sound, volume, pitch);
+                            } catch (IllegalArgumentException e) {
+                                getLogger().warning("Invalid sound specified in the configuration: " + soundName);
+                            }
                         }
+
 
                         // Send title
 
@@ -90,6 +96,14 @@ public final class KeyAllX extends JavaPlugin {
                             int fadeOut = getConfig().getInt("title-fade-out", 20);
 
                             player.sendTitle(titleMessage, subTitleMessage, fadeIn, stay, fadeOut);
+                        }
+
+                        // Hotbar message
+                        if (getConfig().getBoolean("enable-hotbar-message")) {
+                            String hotbarmessage = getConfig().getString("hotbar-message");
+                            hotbarmessage = translateColorCodes(hotbarmessage);
+
+                            player.sendActionBar(hotbarmessage);
                         }
 
                         // Send message

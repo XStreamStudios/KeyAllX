@@ -18,7 +18,7 @@ public class StartAndStop implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String cmd, @NotNull String[] args) {
-        if (cmd.equalsIgnoreCase("reset-timer")) {
+        if (command.getName().equalsIgnoreCase("reset-timer")) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 if (!player.hasPermission("keyallx.reset_timer")) {
