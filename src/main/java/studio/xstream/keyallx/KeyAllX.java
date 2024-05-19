@@ -36,14 +36,13 @@ public final class KeyAllX extends JavaPlugin {
 
         console = Bukkit.getConsoleSender();
 
+        getLogger().info("Loading Commands");
         getCommand("keyallx").setExecutor(new ReloadCommand(this));
         getCommand("keyallx").setTabCompleter(new ReloadCommand(this));
         getCommand("reset-timer").setExecutor(new StartAndStop(this));
+        getLogger().info("Loaded Commands");
 
-        int pluginId = 21830;
-        Metrics metrics = new Metrics(this, pluginId);
-        getLogger().info("Loaded bStats");
-
+        loadMetrics();
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new KeyAllXPlaceholder(this).register();
         } else {
@@ -52,6 +51,15 @@ public final class KeyAllX extends JavaPlugin {
 
         startTimer();
 
+    }
+
+    public void loadMetrics() {
+        if (getConfig().getBoolean("bstats", true)) {
+            getLogger().info("Loading Metrics / bStats");
+            int pluginId = 21830;
+            Metrics metrics = new Metrics(this, pluginId);
+            getLogger().info("Loaded Metrics / bStats");
+        }
     }
 
     @Override
